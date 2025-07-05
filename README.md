@@ -52,7 +52,7 @@ Daily Snapshot is a tiny personal-analytics Discord bot that quietly watches how
 ### Installation
 
 1. Clone this repo:
-- git clone https://github.com/yourusername/daily-snapshot.git
+- git clone this respiratory
 - cd daily-snapshot
 
 
