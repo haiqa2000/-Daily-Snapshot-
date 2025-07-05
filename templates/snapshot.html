@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Daily Snapshot</title>
+<style>
+  {{ css_content | safe }}
+</style>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card {
+    border-radius: 12px;
+    padding: 20px 24px;
+    max-width: 780px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin: 0;
+  }
+  .header {
+    font-weight: 700;
+    font-size: 1.3em;
+    margin-bottom: 12px;
+  }
+  .stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .stat {
+    flex: 1;
+    text-align: center;
+  }
+  .note {
+    margin-top: 20px;
+    font-style: italic;
+    background: rgba(255,255,255,0.15);
+    padding: 10px;
+    border-radius: 8px;
+  }
+  .footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #888;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">Daily Snapshot</div>
+    <div><strong>{{ username }}’s Day · {{ date }} · Theme: {{ theme|capitalize }}</strong></div>
+    <div class="stats">
+      <div class="stat">Messages Sent:<br><strong>{{ messages_sent }}</strong></div>
+      <div class="stat">Top Emoji:<br><span style="font-size:1.5em;">{{ top_emoji }}</span></div>
+      <div class="stat">Mood:<br><span style="font-size:1.5em;">{{ mood }}</span><br>{{ mood_desc }}</div>
+    </div>
+    <div class="stats" style="justify-content:center;">
+      <div>Most Used Words:<br><strong>{{ top_words | join(", ") }}</strong></div>
+    </div>
+    <div class="note">
+      Note to Self:<br>“{{ note }}”
+    </div>
+    <div class="footer">See you tomorrow!</div>
+  </div>
+</body>
+</html>
