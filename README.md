@@ -104,7 +104,7 @@ MIT License
 
 ## Credits
 
-Created by [Your Name] — inspired by the idea of turning daily Discord activity into a fun, shareable visual recap.
+Created by Haiqa Shahzad — inspired by the idea of turning daily Discord activity into a fun, shareable visual recap.
 
 ---
 
