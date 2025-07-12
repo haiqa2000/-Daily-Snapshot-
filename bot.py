@@ -9,6 +9,7 @@ from discord.ext import commands, tasks
 from jinja2 import Environment, FileSystemLoader
 from html2image import Html2Image
 from dotenv import load_dotenv
+from discord import app_commands
 
 # --- CONFIGURATION ---
 load_dotenv()
@@ -138,6 +139,7 @@ hti = Html2Image(output_path="output", size=(900, 500))
 
 @bot.event
 async def on_ready():
+    await bot.tree.sync()
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
     print("------")
     daily_recap.start()
@@ -180,6 +182,42 @@ async def on_message(message):
     conn.commit()
 
     await bot.process_commands(message)
+
+@bot.tree.command(name="help", description="List available bot commands and usage.")
+async def help_command(interaction: discord.Interaction):
+    help_text = (
+        "**Available Commands:**\n"
+        "`/help` - Show this message\n"
+        "`!mood` - Log your current mood\n"
+        "`!note <text>` - Save a daily note\n"
+        "`!theme <pastel|dark|neon>` - Set your snapshot theme\n"
+        "`!snapshot now` - Generate your snapshot immediately\n"
+    )
+    await interaction.response.send_message(help_text, ephemeral=True)
+@bot.tree.command(name="ping", description="Check the bot's latency.")
+async def ping_command(interaction: discord.Interaction):
+    latency = round(bot.latency * 1000)
+    await interaction.response.send_message(f"Pong! Latency: {latency}ms", ephemeral=True)
+
+
+# --- !help command ---
+@bot.command(name="help")
+async def help(ctx):
+    help_text = (
+        "**Available Commands:**\n"
+        "`/help` - Show this message\n"
+        "`!mood` - Log your current mood\n"
+        "`!note <text>` - Save a daily note\n"
+        "`!theme <pastel|dark|neon>` - Set your snapshot theme\n"
+        "`!snapshot now` - Generate your snapshot immediately\n"
+    )
+    await ctx.send(help_text)
+
+# --- !ping command ---
+@bot.command(name="ping")
+async def ping(ctx):
+    latency = round(bot.latency * 1000)
+    await ctx.send(f"Pong! Latency: {latency}ms")
 
 # --- !mood command ---
 @bot.command(name="mood")
